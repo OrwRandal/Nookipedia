@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ItemCard from "./ItemCard";
+import API_KEY from "../config";
 
 const BrowseItems = ({selectedItem}) => {
     const [items, setItems] = useState([]);
@@ -23,7 +24,7 @@ const BrowseItems = ({selectedItem}) => {
           const options = {
             headers: {
             "Content-Type": "application/json",
-            "X-API-KEY": "2285291f-c0dd-4317-8712-c89d4d8b24e9"
+            "X-API-KEY": API_KEY
             }
           }
           const url = `https://api.nookipedia.com${paths[selectedItem]}`;
