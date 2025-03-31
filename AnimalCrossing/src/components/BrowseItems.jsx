@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import ItemCard from "./ItemCard";
 import API_KEY from "../config";
+import MyContext from "../context/MyContext";
+import { useContext } from "react";
 
-const BrowseItems = ({selectedItem}) => {
+const BrowseItems = () => {
     const [items, setItems] = useState([]);
     const [query, setQuery] = useState("");
     const [pagination, setPagination] = useState(0);
@@ -10,12 +12,7 @@ const BrowseItems = ({selectedItem}) => {
     const leftPagBool = pagination > 0;
     const rightPagBool = (pagination + 1) * 20 < items.length;
 
-    const paths = {
-        villagers: "/villagers",
-        fish: "/nh/fish",
-        bugs: "/nh/bugs",
-        "Sea Creatures": "/nh/sea" 
-    }
+    const {selectedItem, paths} = useContext(MyContext);
 
     useEffect(() => {
         setLoading(true);

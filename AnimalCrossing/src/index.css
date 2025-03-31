@@ -1,21 +1,55 @@
 body{
   margin: 0;
   padding: 0;
-  background-color: #e5d3b3;
-  color: #2ecc71;
   font-family: "Itim", cursive;
+}
+
+nav{
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100px;
+  background-color: #7fc8aa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 50px;
+}
+
+nav a{
+  text-decoration: none;
+}
+nav h1{
+  margin:0;
+  color: white;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav h1:hover{
+  transform:scale(1.1) rotate(-5deg)
+}
+
+nav img{
+  filter: brightness(0) invert(1);
+  transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor:pointer;
+}
+
+nav img:hover{
+  transform:scale(1.1) rotate(5deg)
 }
 
 #itemTitle{
   font-size: 70px;
   font-weight: 1000;
   margin-bottom: 20px;
+  color:#7fc8aa;
 }
 
 #browse-div{
   box-sizing: border-box;
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 100px);
   padding: 10px;
 }
 
@@ -25,7 +59,8 @@ body{
   align-items: center;
   width:300px;
   margin: 20px 10px;
-  background-color:#2ecc71;
+  /* background-color:#2ecc71; */
+  background-color: #7fc8aa;
   color:white;
   border-radius: 30px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -41,6 +76,7 @@ body{
 }
 
 #side-bar h1{
+  color:white;
   font-size: 55px;
   margin: 10px 0 10px 0;
 }
@@ -65,9 +101,9 @@ body{
   width: 100%;
   padding: 13px;
   font-size: 15px;
-  border: solid #2ecc71 4px;
+  border: solid #7fc8aa 4px;
   border-radius: 10px;
-  background-color: #e5d3b3;
+  background-color: #f3e0c9;
 }
 
 #pagination{
@@ -78,6 +114,7 @@ body{
 }
 
 #pagination p{
+  color: #7fc8aa;
   margin: 0;
   padding: 0 10px;
   font-size: 23px;
@@ -87,7 +124,7 @@ body{
   border-radius: 50%;
   height: 35px;
   width: 35px;
-  background-color: #2ecc71;
+  background-color: #7fc8aa;
   color: white;
   border: 0px;
   transition: all .5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -123,43 +160,7 @@ body{
   );
 }
 
-
-
 /* .itemCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  width: 250px;
-  height: fit-content;
-  background: linear-gradient(to top, #ffc2b0, #ff9d84);
-  margin: 10px 25px;
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  transition: all .5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.itemCard h1 {
-  font-size: 40px;
-  margin: 20px;
-}
-
-.itemCard::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: -10%;
-  width: 300px;
-  height: 130px;
-  background: linear-gradient(to top, #ffb29c, #ff8064);
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-} */
-
-.itemCard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -177,6 +178,7 @@ body{
 }
 
 .itemCard h1 {
+  color:white;
   font-size: 40px;
   margin: 20px;
 }
@@ -191,6 +193,41 @@ body{
   background: linear-gradient(to top, #3fb56c, #1f9c4a);
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
+} */
+
+.itemCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  width: 250px;
+  height: fit-content;
+  background: linear-gradient(to top, #a0d9bf, #7fc8aa);
+  margin: 10px 25px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: all .5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.itemCard h1 {
+  color: white;
+  font-size: 40px;
+  margin: 20px;
+}
+
+.itemCard::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  width: 300px;
+  height: 130px;
+  background: linear-gradient(to top, #92d1b4, #72b99d);
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
 }
 
 
@@ -198,6 +235,7 @@ body{
 .cardImg{
   height: 200px;
   z-index: 1;
+  margin-bottom: 20px;
   /* -webkit-filter: drop-shadow(3px 3px 0 white) 
                 drop-shadow(-3px -3px 0 white) 
                 drop-shadow(3px -3px 0 white) 
@@ -221,6 +259,7 @@ filter: drop-shadow(3px 3px 0 white)
 .itemCard:hover{
   cursor: pointer;
   transform: scale(1.05);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 .genderIcon{

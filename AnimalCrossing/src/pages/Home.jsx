@@ -1,6 +1,7 @@
 import "../home.css";
 import Carousel from "../components/Carousel";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import MyContext from "../context/MyContext";
 import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -18,21 +19,23 @@ const catagories = [
     image: "https://dodo.ac/np/images/d/db/Cherry_Salmon_NH_Icon.png",
   },
   {
-    catagory: "sea-creatures",
+    catagory: "Sea Creatures",
     image: "http://dodo.ac/np/images/5/58/Octopus_NH_Icon.png",
   },
 ];
 
 const Home = () => {
+  const {setSelectedItem} = useContext(MyContext);
   const navigate = useNavigate()
   const handleClick = (key) => {
     console.log(`Navigating to ${key}`);
-    navigate(`/${key}`)
+    setSelectedItem(key)
+    navigate("/browse/")
   }
 
   return (
     <>
-      <h1>Nookipedia</h1>
+      <h1 id="homeTitle">Nookipedia</h1>
       <section className="bio">
         Welcome to your one-stop spot for all things Animal Crossing! This cozy
         little corner of the web is powered by the magical Nookipedia API—which
@@ -42,7 +45,9 @@ const Home = () => {
         Nook). So grab a cup of coffee from Brewster, kick back, and explore
         your favorite ACNH goodies. 🍃
       </section>
+      <h1 className="subtitle">Games</h1>
       <Carousel />
+      <h1 className="subtitle">Categories</h1>
       <section className="catagories">
         {catagories.map((catagory, idx) => {
           // const actualIndex = idx;
