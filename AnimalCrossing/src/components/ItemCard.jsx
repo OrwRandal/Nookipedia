@@ -1,7 +1,16 @@
-const ItemCard = ({selectedItem, item}) => {
+import {useNavigate} from "react-router-dom"
+import { useContext } from "react";
+import MyContext from "../context/MyContext";
+const ItemCard = ({item}) => {
+    const {selectedItem} = useContext(MyContext);
+    const navigate = useNavigate();
+    const cardClick = () => {
+        navigate(`/info/${selectedItem}/${item.name}/${item.id || ""}`)
+    }
     return (
-        <div className="itemCard" key={item.id}>
+        <div className="itemCard" onClick={cardClick}>
             <h1>{item.name[0].toUpperCase() + item.name.slice(1)}</h1>
+            <p>{item.id}</p>
             <img className="cardImg" src={item.image_url}></img>
         </div>
     )
