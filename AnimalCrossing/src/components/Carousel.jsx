@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "../home.css";
+import { useContext } from "react";
+import MyContext from "../context/MyContext";
+
 const Carousel = () => {
+  const { isDarkMode } = useContext(MyContext);
   const games = [
     {
       title: "Animal Crossing: New Horizons",
@@ -84,7 +88,6 @@ const Carousel = () => {
   const visibleGames = games.slice(startIndex, startIndex + 3);
   return (
     <div className="carousel-wrapper">
-
       <div className="carousel-container">
         <button className="nav-button left" onClick={handlePrev}>
           &larr;
@@ -103,7 +106,7 @@ const Carousel = () => {
                   <div className="flip-card-front">
                     <img src={game.image} alt={game.title} />
                   </div>
-                  <div className="flip-card-back">
+                  <div className={`flip-card-back ${isDarkMode ? "darkInput" : "lightInput"}`}>
                     <h3>{game.title}</h3>
                     <p>
                       <strong>Release:</strong> {game.releaseDate}

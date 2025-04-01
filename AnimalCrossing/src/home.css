@@ -177,6 +177,7 @@ h1 {
   overflow: hidden;
 }
 
+
 /* Front of Flip Card */
 .flip-card-front {
   background-color: #fff;
@@ -200,8 +201,20 @@ h1 {
   color: #333;
   /* Changed box sizing so that the padding does not change the size of the overall div*/
   box-sizing: border-box;
-
 }
+.flip-card-back-dark{
+  background-color: #f0f0f0;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  /* Changed box sizing so that the padding does not change the size of the overall div*/
+  box-sizing: border-box;
+}
+
 
 
 .flip-card-back h3 {
@@ -220,4 +233,13 @@ img {
 
   max-width: 100%;
   display: block;
+}
+
+.darkInput {
+  background-color: #3a1d1d;
+  color: white;
+}
+.darkInput h3 {
+  background-color: #3a1d1d;
+  color: #7fc8a9;
 }

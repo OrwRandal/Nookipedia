@@ -50,7 +50,6 @@ const Home = () => {
       <h1 className="subtitle">Categories</h1>
       <section className="catagories">
         {catagories.map((catagory, idx) => {
-          // const actualIndex = idx;
           const key = catagory.catagory;
           return (
             <div 
