@@ -1,26 +1,27 @@
-import { useState } from "react";
+import { useContext } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import Catagory from "./pages/Catagory";
 import BrowsePage from "./pages/BrowsePage";
 import NavBar from "./components/Navbar";
 import ItemInfoPage from "./pages/ItemInfoPage";
+import SavedPage from "./pages/savedPage";
 import { Routes, Route } from "react-router-dom";
-import MyProvider from "./context/MyProvider";
+import MyContext from "./context/MyContext";
 
 function App() {
+  const {isDarkMode} = useContext(MyContext);
   return (
-    <MyProvider>
-      <div className="App">
+      <div className={isDarkMode? "darkApp App": "App"}>
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:catagory" element={<Catagory />} />
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/info/:category/:name/:id?" element={<ItemInfoPage />} />
+          <Route path="/saved" element={<SavedPage />} />
         </Routes>
       </div>
-    </MyProvider>
   );
 }
 

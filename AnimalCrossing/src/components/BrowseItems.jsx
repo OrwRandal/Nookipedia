@@ -12,7 +12,7 @@ const BrowseItems = () => {
     const leftPagBool = pagination > 0;
     const rightPagBool = (pagination + 1) * 20 < items.length;
 
-    const {selectedItem, paths} = useContext(MyContext);
+    const {selectedItem, paths, isDarkMode} = useContext(MyContext);
 
     useEffect(() => {
         setLoading(true);
@@ -40,7 +40,7 @@ const BrowseItems = () => {
     <div id="browseItemsDiv">
         <h1 id="itemTitle">{selectedItem[0].toUpperCase() + selectedItem.slice(1)}</h1>
         <form>
-            <input type="search" value={query} onChange={(e) => setQuery(e.target.value)}></input>
+            <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} id={isDarkMode? "darkInput":"lightInput"}></input>
         </form>
         {!query && !loading && <div id="pagination">
             <button style={{visibility: leftPagBool? "visible": "hidden"}}
@@ -54,11 +54,11 @@ const BrowseItems = () => {
 
         {items.length > 0 && query && items.map((item) => {
         return item.name.toLowerCase().includes(query.toLowerCase())? 
-          <ItemCard item={item}/> : <></>
+          <ItemCard item={item} type={selectedItem}/> : <></>
       })}
 
         {items.length > 0 && !query && items.slice(pagination * 20, (pagination * 20) + 20).map((item) => {
-            return <ItemCard selectedItem={selectedItem} item={item}/>
+            return <ItemCard selectedItem={selectedItem} item={item} type={selectedItem}/>
       })}
         </div>
     </div> );

@@ -5,11 +5,22 @@ import MyContext from "../context/MyContext";
 import "../iteminfo.css";
 
 const ItemInfoPage = () => {
-  const { paths } = useContext(MyContext);
+  const {paths, saved, setSaved} = useContext(MyContext)
   const { category, name, id } = useParams();
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const savedChecker = () => {
+    return saved[category]?.some((obj) => JSON.stringify(obj) === JSON.stringify(item));
+}
+const [savedToggle, setSavedToggle] = useState(false);
+
+
+useEffect(() => {
+    if(!(category in saved)) navigate('/browse')
+    setSavedToggle(savedChecker());
+}, [saved, item]);
 
   const normalizedCategory = category?.toLowerCase().replace(/[_\s]/g, "-");
 
@@ -49,6 +60,10 @@ const ItemInfoPage = () => {
     doFetch();
   }, [category, name, id, paths, navigate]);
 
+  useEffect(() => {
+    localStorage.setItem("savedData", JSON.stringify(saved));
+}, [saved]);
+
   const getPersonalityColor = (personality) => {
     const colors = {
       Normal: "#E0C9A6",
@@ -85,19 +100,33 @@ const ItemInfoPage = () => {
     return styles[category] || { backgroundColor: "#fff8dc", borderColor: "#ccc" };
   };
 
-  const saveItemToLocalStorage = (itemToSave) => {
-    const saved = JSON.parse(localStorage.getItem("savedItems")) || [];
-    const exists = saved.some(
-      (el) => el.name === itemToSave.name && el.category === itemToSave.category
-    );
-    if (!exists) {
-      saved.push(itemToSave);
-      localStorage.setItem("savedItems", JSON.stringify(saved));
-      alert("Item saved!");
+  const saveItem = () => {
+    const newSaved = { ...saved };
+    const exists = savedChecker();
+    if(exists) {
+        const index = newSaved[category].findIndex(obj => JSON.stringify(obj) === JSON.stringify(item));
+        newSaved[category] = newSaved[category].filter((element, i) => i !== index);
     } else {
-      alert("Item already saved.");
+        newSaved[category] = [...newSaved[category], item];
     }
-  };
+    setSaved(newSaved);
+    setSavedToggle(!exists);
+}
+
+
+//   const saveItemToLocalStorage = (itemToSave) => {
+//     const saved = JSON.parse(localStorage.getItem("savedItems")) || [];
+//     const exists = saved.some(
+//       (el) => el.name === itemToSave.name && el.category === itemToSave.category
+//     );
+//     if (!exists) {
+//       saved.push(itemToSave);
+//       localStorage.setItem("savedItems", JSON.stringify(saved));
+//       alert("Item saved!");
+//     } else {
+//       alert("Item already saved.");
+//     }
+//   };
 
   if (loading) {
     return (
@@ -124,7 +153,7 @@ const ItemInfoPage = () => {
         }}
       >
         <div className="villager-header">
-          <h1 className="villager-name">{item.name}</h1>
+          <h1 className="villager-name">{item.name[0].toUpperCase() + item.name.slice(1)}</h1>
           <span className="villager-species">
             {item.species || item.category || category}
           </span>
@@ -263,9 +292,9 @@ const ItemInfoPage = () => {
           )}
           <button
             className="save-button"
-            onClick={() => saveItemToLocalStorage({ ...item, category })}
+            onClick={saveItem}
           >
-            Save to My Page
+            {savedToggle? "Remove From Saved": "Save To My Page"}
           </button>
         </div>
       </div>
