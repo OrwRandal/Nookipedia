@@ -235,7 +235,7 @@ useEffect(() => {
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">Total Catches:</span>
-                  <span className="detail-value">{item.total_catches}</span>
+                  <span className="detail-value">{item.total_catch}</span>
                 </div>
               </>
             )}

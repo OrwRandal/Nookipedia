@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <>
-      <h1 id="homeTitle">Nookipedia</h1>
+      <h1 id="homeTitle">Crossing Corner</h1>
       <section className={isDarkMode? "darkBio bio": "lightBio bio"}>
         Welcome to your one-stop spot for all things Animal Crossing! This cozy
         little corner of the web is powered by the magical Nookipedia API—which
