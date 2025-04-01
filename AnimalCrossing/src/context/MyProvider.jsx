@@ -11,6 +11,14 @@ const MyProvider = ({ children }) => {
       "Sea Creatures": []
     };
   });
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleMode = () => {
+    setIsDarkMode((prev) => !prev);
+  };
+
+
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("savedData")) || saved;
     setSaved(storedData);
@@ -27,7 +35,9 @@ const MyProvider = ({ children }) => {
     setSelectedItem,
     paths,
     saved,
-    setSaved
+    setSaved,
+    isDarkMode,
+    toggleMode
   }
   return (
     <MyContext.Provider value={values}>

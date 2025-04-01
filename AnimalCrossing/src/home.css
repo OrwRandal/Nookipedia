@@ -1,6 +1,7 @@
 /* Base Styles */
 body {
   background-color: #f2e0c9;
+  /* background-color: #472814; */
  font-family: 'Itim', cursive;
   margin: 0;
   padding: 0;
@@ -38,7 +39,7 @@ h1 {
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
-  margin: 3rem 2rem;
+  padding: 3rem 2rem;
 
 }
 

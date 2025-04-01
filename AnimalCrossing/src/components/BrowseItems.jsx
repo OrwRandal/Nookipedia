@@ -12,7 +12,7 @@ const BrowseItems = () => {
     const leftPagBool = pagination > 0;
     const rightPagBool = (pagination + 1) * 20 < items.length;
 
-    const {selectedItem, paths} = useContext(MyContext);
+    const {selectedItem, paths, isDarkMode} = useContext(MyContext);
 
     useEffect(() => {
         setLoading(true);
@@ -40,7 +40,7 @@ const BrowseItems = () => {
     <div id="browseItemsDiv">
         <h1 id="itemTitle">{selectedItem[0].toUpperCase() + selectedItem.slice(1)}</h1>
         <form>
-            <input type="search" value={query} onChange={(e) => setQuery(e.target.value)}></input>
+            <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} id={isDarkMode? "darkInput":"lightInput"}></input>
         </form>
         {!query && !loading && <div id="pagination">
             <button style={{visibility: leftPagBool? "visible": "hidden"}}
