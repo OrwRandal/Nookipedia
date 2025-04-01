@@ -54,11 +54,11 @@ const BrowseItems = () => {
 
         {items.length > 0 && query && items.map((item) => {
         return item.name.toLowerCase().includes(query.toLowerCase())? 
-          <ItemCard item={item}/> : <></>
+          <ItemCard item={item} type={selectedItem}/> : <></>
       })}
 
         {items.length > 0 && !query && items.slice(pagination * 20, (pagination * 20) + 20).map((item) => {
-            return <ItemCard selectedItem={selectedItem} item={item}/>
+            return <ItemCard selectedItem={selectedItem} item={item} type={selectedItem}/>
       })}
         </div>
     </div> );

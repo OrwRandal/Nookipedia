@@ -262,10 +262,22 @@ filter: drop-shadow(3px 3px 0 white)
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-.genderIcon{
-  position: relative;
-  height: 30px;
-  z-index: 1;
+.savedDiv{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.savedSubtitle{
+  text-align: start;
+  margin-left: 30px;
+}
+#savedH1{
+  font-size: 75px;
+}
+
+#emptySave{
+  color: #7fc8aa;
+  text-align: center;
 }
 
 .loader {

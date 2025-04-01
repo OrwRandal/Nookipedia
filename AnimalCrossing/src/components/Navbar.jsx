@@ -6,7 +6,9 @@ const NavBar = () => {
         <Link to="/">
             <h1>Nookipedia</h1>
         </Link>
-        <img src={chest}></img>
+        <Link to="/saved">
+            <img src={chest}></img>
+        </Link>
     </nav>)
 }
 

@@ -4,10 +4,21 @@ import API_KEY from "../config"
 import { useContext } from 'react';
 import MyContext from '../context/MyContext';
 const ItemInfoPage = () => {
-    const {paths} = useContext(MyContext)
+    const {paths, saved, setSaved} = useContext(MyContext)
     const {category, name,id} = useParams();
     const [item, setItem] = useState([])
     const navigate = useNavigate();
+
+    const savedChecker = () => {
+        return saved[category]?.some((obj) => JSON.stringify(obj) === JSON.stringify(item));
+    }
+    const [savedToggle, setSavedToggle] = useState(false);
+
+    useEffect(() => {
+        if(!(category in saved)) navigate('/browse')
+        setSavedToggle(savedChecker());
+    }, [saved, item]);
+
     useEffect(() => {
         const doFetch = async () =>{
             const options = {
@@ -18,7 +29,6 @@ const ItemInfoPage = () => {
             }
             const url = category !== "villagers"? `https://api.nookipedia.com${paths[category]}/${encodeURIComponent(name)}`
             :`https://api.nookipedia.com${paths[category]}?name=${encodeURIComponent(name)}`;
-            console.log(url)
             const response = await fetch(url, options);
             const data = await response.json();
 
@@ -38,11 +48,30 @@ const ItemInfoPage = () => {
             console.log(data)
         }
         doFetch();
-    }, [category, name, id])
+    }, [category, name, id]);
+
+    useEffect(() => {
+        localStorage.setItem("savedData", JSON.stringify(saved));
+    }, [saved]);
+
+    const saveItem = () => {
+        const newSaved = { ...saved };
+        const exists = savedChecker();
+        if(exists) {
+            const index = newSaved[category].findIndex(obj => JSON.stringify(obj) === JSON.stringify(item));
+            newSaved[category] = newSaved[category].filter((element, i) => i !== index);
+        } else {
+            newSaved[category] = [...newSaved[category], item];
+        }
+        setSaved(newSaved);
+        setSavedToggle(!exists);
+    }
+
     return (
         <>
             <h1>{item?.name}</h1>
             <img src={item?.image_url}></img>
+            <button onClick={saveItem}>{savedToggle? "Unsave": "Save"}</button>
         </>
     )
 }
