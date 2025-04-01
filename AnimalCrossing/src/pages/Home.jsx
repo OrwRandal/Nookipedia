@@ -25,7 +25,7 @@ const catagories = [
 ];
 
 const Home = () => {
-  const {setSelectedItem} = useContext(MyContext);
+  const {setSelectedItem, isDarkMode} = useContext(MyContext);
   const navigate = useNavigate()
   const handleClick = (key) => {
     console.log(`Navigating to ${key}`);
@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <>
       <h1 id="homeTitle">Nookipedia</h1>
-      <section className="bio">
+      <section className={isDarkMode? "darkBio bio": "lightBio bio"}>
         Welcome to your one-stop spot for all things Animal Crossing! This cozy
         little corner of the web is powered by the magical Nookipedia API—which
         means you’ll get the freshest villager gossip, bug and fish facts, event

@@ -23,14 +23,21 @@ h1 {
 .bio {
   max-width: 800px;
   margin: 2rem auto;
-  background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  color: #333;
   line-height: 1.6;
   font-size: 20px;
   text-align: center;
+}
+
+.lightBio{
+  background-color: white;
+  color: black;
+}
+.darkBio{
+  background-color: #58371c;
+  color: white;
 }
 
 /* Categories Section */
@@ -40,7 +47,6 @@ h1 {
   gap: 2rem;
   flex-wrap: wrap;
   padding: 3rem 2rem;
-
 }
 
 .catagory {
@@ -214,7 +220,6 @@ h1 {
   /* Changed box sizing so that the padding does not change the size of the overall div*/
   box-sizing: border-box;
 }
-
 
 
 .flip-card-back h3 {
