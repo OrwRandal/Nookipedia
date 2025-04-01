@@ -16,23 +16,25 @@ const ItemInfoPage = () => {
                     "X-API-KEY": API_KEY
                 }
             }
-            const url = category === "Sea Creatures"? `https://api.nookipedia.com${paths[category]}/${encodeURIComponent(name)}`
+            const url = category !== "villagers"? `https://api.nookipedia.com${paths[category]}/${encodeURIComponent(name)}`
             :`https://api.nookipedia.com${paths[category]}?name=${encodeURIComponent(name)}`;
+            console.log(url)
             const response = await fetch(url, options);
             const data = await response.json();
 
             if(data.length === 0) navigate('/browse');
 
-            if(category === "villagers" && data.length > 1){
-                setItem(data.find((element) => {
-                    return element.id === (id || "")})
-                );
-            } else if(category === "Sea Creatures"){
+            if(category === "villagers"){
+                if(data.length > 1){
+                    setItem(data.find((element) => {
+                        return element.id === (id || "")})
+                    );
+                } else {
+                    setItem(data[0]);
+                }
+            } else {
                 setItem(data);
-            }
-            else {
-                setItem(data[0]);
-            }
+            };
             console.log(data)
         }
         doFetch();
